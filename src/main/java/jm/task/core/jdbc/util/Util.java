@@ -22,47 +22,19 @@ public class Util {
     private static SessionFactory sessionFactory;
 
 
-    public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            try {
-                //     Driver driver = new com.mysql.cj.jdbc.Driver();
-                //      DriverManager.registerDriver(driver);
 
-                Properties settings = new Properties();
-                //      settings.put(Environment.DRIVER, driver);
-                settings.put(Environment.URL, URL);
-                settings.put(Environment.USER, USERNAME);
-                settings.put(Environment.PASS, PASSWORD);
-                settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQLDialect");
-             //   settings.put(Environment.SHOW_SQL, "true");
-                settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-                settings.put(Environment.HBM2DDL_AUTO, "create-drop");
-
-                Configuration configuration = new Configuration();
-                configuration.setProperties(settings);
-                configuration.addAnnotatedClass(User.class);
-
-                ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                        .applySettings(configuration.getProperties()).build();
-
-                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-
-        }
-        return sessionFactory;
-    }
 
     public static Connection getConnect() {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+          //  Driver driver = new com.mysql.cj.jdbc.Driver();
+         //   DriverManager.registerDriver(driver);
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return connection;
     }
 }
+
+
